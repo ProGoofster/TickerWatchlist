@@ -12,12 +12,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TickerListFragment tickerFrag = new TickerListFragment();
-        InfoWebFragment webFrag = new InfoWebFragment();
+        TickerListFragment tickerFragment = new TickerListFragment();
+        InfoWebFragment webFragment = new InfoWebFragment();
 
         FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
-        trans.add(R.id.ticker_list_fragment_frame, tickerFrag);
-        trans.add(R.id.info_web_fragment_frame, webFrag);
+        trans.add(R.id.ticker_list_fragment_frame, tickerFragment);
+        trans.add(R.id.info_web_fragment_frame, webFragment);
         trans.commit();
 
     }

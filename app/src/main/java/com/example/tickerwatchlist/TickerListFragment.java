@@ -43,15 +43,11 @@ public class TickerListFragment extends Fragment {
                 new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, tickers);
         listView.setAdapter(adapter);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+        listView.setOnItemClickListener((parent, view1, position, id) -> {
+            String clickedTicker = tickers.get(position);
 
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String clickedTicker = tickers.get(position);
-
-                InfoWebFragment webFragment = (InfoWebFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.info_web_fragment_frame); //direct get fragment
-                if (webFragment != null) webFragment.loadTicker(clickedTicker);
-            }
+            InfoWebFragment webFragment = (InfoWebFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.info_web_fragment_frame); //direct get fragment
+            if (webFragment != null) webFragment.loadTicker(clickedTicker);
         });
 
         return view;

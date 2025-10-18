@@ -13,12 +13,16 @@ import androidx.fragment.app.Fragment;
 
 import com.example.tickerwatchlist.datatypes.FixedLinkedList;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
 public class TickerListFragment extends Fragment {
+    FixedLinkedList<String> tickers;
+    ArrayAdapter<String> adapter;
+
     public TickerListFragment() {
         // Required empty public constructor
     }
@@ -26,8 +30,6 @@ public class TickerListFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
     }
 
     @Override
@@ -36,10 +38,15 @@ public class TickerListFragment extends Fragment {
 
         ListView listView = view.findViewById(R.id.ticker_list);
 
-        FixedLinkedList<String> tickers = new FixedLinkedList<>(6);
-        tickers.addAll(Arrays.asList("NEE", "AAPL", "DIS"));
+        tickers = new FixedLinkedList<>(6);
+        if (getArguments() != null) {
+            ArrayList<String> initialTickers = getArguments().getStringArrayList("tickers");
+            if (initialTickers != null) {
+                tickers.addAll(initialTickers);
+            }
+        }
 
-        ArrayAdapter<String> adapter =
+        adapter =
                 new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, tickers);
         listView.setAdapter(adapter);
 
@@ -51,5 +58,16 @@ public class TickerListFragment extends Fragment {
         });
 
         return view;
+    }
+
+    public void addTicker(String ticker) {
+        if (!tickers.contains(ticker)) {
+            tickers.add(ticker);
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    public FixedLinkedList<String> getTickers() {
+        return tickers;
     }
 }

@@ -3,6 +3,8 @@ package com.example.tickerwatchlist.datatypes;
 import java.util.LinkedList;
 import java.util.Arrays;
 public class FixedLinkedList<T> extends LinkedList<T> {
+    //This counts for Round robin replacement of Tickers that are in the list
+    //I did this before even reading the extra credit. I did this on part a :P
     private final int maxSize;
 
     public FixedLinkedList(int maxSize) {
